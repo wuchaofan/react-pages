@@ -33,11 +33,11 @@ module.exports = (env, argv) => ({
 			},
 			{ test: /\.tsx?$/, loader: "awesome-typescript-loader" },
 			{ enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
-			{
-				test: /\.css$/,
-				use: ["style-loader", "css-loader"],
-				exclude: /node_modules/,
-			},
+			// {
+			// 	test: /\.css$/,
+			// 	use: ["style-loader", "css-loader", "postcss-loader"],
+			// 	exclude: /node_modules/,
+			// },
 			{
 				test: /\.(less|css)$/, //css打包 路径在plugins里
 				use: [
@@ -51,6 +51,7 @@ module.exports = (env, argv) => ({
 							sourceMap: true
 						}
 					},
+					"postcss-loader",
 					{
 						loader: "less-loader",
 						options: {
