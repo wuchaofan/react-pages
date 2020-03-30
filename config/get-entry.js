@@ -20,7 +20,7 @@ module.exports = function getEnty(path) {
 		 * 这样目的是为了将js打包到对应的文件夹下
 		 */
 		const ext = extensions.find(el => fs.existsSync(`${path}/${item}/index${el}`))
-		entry[`${item}/${item}`] = `${path}/${item}/index${ext}`;
+		entry[`${item}`] = `${path}/${item}/index${ext}`;
 		return entry
 	}, {});
 };

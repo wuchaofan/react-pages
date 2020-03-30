@@ -10,7 +10,7 @@ let htmlArr = [];
 
 function createHtml(page_path) {
 	getPath(page_path).map((item) => {
-		console.log({item})
+		console.log({page: item})
 		let infoJson = {},
 			infoData = {};
 		try {
@@ -26,9 +26,9 @@ function createHtml(page_path) {
 				keywords: infoData.keywords || '',
 				description: infoData.description || ''
 			},
-			chunks: [`${item}/${item}`], //引入的js
+			chunks: [`${item}`], //引入的js
 			template: "./src/template.html",
-			filename: `${item}/index.html`, //html位置
+			filename: `${item}.html`, //html位置
 			minify: { //压缩html
 				collapseWhitespace: true,
 				preserveLineBreaks: true

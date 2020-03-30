@@ -21,7 +21,7 @@ module.exports = (env, argv) => ({
 	entry: entry,
 	output: {
 		path: path.join(__dirname, "dist"),
-		filename: "[name].js"
+		filename: "[name].[hash:8].js"
 	},
 	module: {
 		rules: [{
@@ -74,7 +74,7 @@ module.exports = (env, argv) => ({
 	devServer: {
 		port: 3100,
 		open: true,
-		openPage: 'index'
+		// openPage: 'index'
 	},
 	resolve: {
 		alias: {
@@ -83,21 +83,13 @@ module.exports = (env, argv) => ({
 		},
 		extensions: [".ts", ".tsx", ".js", ".json"]
 	},
-	externals: {
-		"react": "React",
-		"react-dom": "ReactDOM"
-	},
 	plugins: [
 		new CleanWebpackPlugin(),
 		...htmlArr, // html插件数组
 		new MiniCssExtractPlugin({ //分离css插件
-			filename: "[name].css",
+			filename: "[name].[contentHash:8].css",
 			chunkFilename: "[id].css"
 		}),
-		new CopyPlugin([
-      { from: path.resolve(__dirname, "node_modules/react/umd/react.production.min.js"), to: 'js/react.production.min.js' },
-      { from: path.resolve(__dirname, "node_modules/react-dom/umd/react-dom.production.min.js"), to: 'js/react-dom.production.min.js' },
-    ]),
 	],
 	optimization: {
 		minimizer: [ //压缩js
@@ -109,24 +101,26 @@ module.exports = (env, argv) => ({
 			new OptimizeCSSAssetsPlugin({})
 		],
 		splitChunks: {
-			chunks: 'async', 
-      minSize: 30000,
-      maxSize: 0,
-      minChunks: 1,
-      maxAsyncRequests: 5,
-      maxInitialRequests: 3,
-      automaticNameDelimiter: '~',
-      name: true,
+			chunks: 'all', 
+      // minSize: 30000,
+      // maxSize: 0,
+      // minChunks: 1,
+      // maxAsyncRequests: 5,
+      // maxInitialRequests: 3,
+      // automaticNameDelimiter: '~',
+      // name: true,
       cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          priority: -10
-        },
-        default: {
-          minChunks: 2,
-          priority: -20,
-          reuseExistingChunk: true
-				},
+        // vendor: {
+				// 	test: /[\\/]node_modules[\\/]/,
+				// 	name: true,
+				// 	enforce: true,
+				// 	chunks: 'all'
+				// },
+        // default: {
+        //   minChunks: 2,
+        //   priority: -20,
+        //   reuseExistingChunk: true
+				// },
 				styles: {
 					name: "styles",
 					test: /\.css$/,
