@@ -28,7 +28,7 @@ function createHtml(page_path) {
 			},
 			chunks: [`${item}/${item}`], //引入的js
 			template: "./src/template.html",
-			filename: `${item}.html`, //html位置
+			filename: `${item}/index.html`, //html位置
 			minify: { //压缩html
 				collapseWhitespace: true,
 				preserveLineBreaks: true
